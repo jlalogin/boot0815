@@ -1,0 +1,80 @@
+body {
+    font-family: arial;
+    color: red;
+}
+
+.myDiv {
+    position:absolute;
+    width: 640px;
+    height: 480px;
+    left: 100px;
+    top: 100px;
+    border: solid red 1px;
+}
+
+div {
+    font-weight: bold;
+}
+
+@keyframes gradient {
+    from {background-color: gray;}
+    to {background-color: #efefef;}
+}
+
+#div0 {
+    color: green;
+    font-weight: normal;
+    width: 180px;
+    background-color: red;
+    animation-name: gradient;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+}
+
+.div0 {
+    color: #3399cc;
+    font-weight: normal;
+}
+
+div span {
+    font-style: normal;
+    font-weight: normal;
+    color: green;
+}
+
+div>span {
+    font-style: italic;
+    color: blue;
+}
+
+em+span {
+    text-decoration: overline;
+    color: blue;
+}
+
+strong~span {
+    text-decoration: line-through;
+    color: green;
+}
+
+div[title~=demo] {
+    font-size: 10pt;
+    color: blue;
+}
+
+li:nth-child(2n) {
+    color: green;
+}
+
+li:nth-child(2) {
+    color: blue;
+}
+
+div>span:hover, li:hover {
+    font-size: 1.25em;
+    background-color: gray;
+}
+
+span:first-of-type {
+    color: #ababab;
+}

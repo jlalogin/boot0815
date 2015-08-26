@@ -1,0 +1,121 @@
+body {
+  margin: 0px;
+  padding: 0px;
+  background-color: #3399cc; }
+
+.flexbox {
+  display: flex;
+  flex-direction: column;
+  border: solid 1px red;
+  align-items: center;
+  justify-content: center; }
+  .flexbox div {
+    border: solid black;
+    button-display: block;
+    button-color: green;
+    button-height: 30px;
+    button-vertical-align: middle; }
+  .flexbox header {
+    flex-grow: 1;
+    background-color: #ccc; }
+  .flexbox footer {
+    flex-grow: 1;
+    background-color: #ccc; }
+
+.box {
+  border: ridge #ccc 25px;
+  font-weight: normal;
+  font-family: cursive;
+  font-size: 16px; }
+
+.bold, header, span {
+  font-weight: bold; }
+
+header {
+  color: green; }
+
+footer {
+  color: green; }
+
+div > header {
+  color: blue; }
+  div > header:hover {
+    font-size: 1.25em; }
+div > footer {
+  color: blue; }
+div > p {
+  font-family: sans-serif; }
+
+span {
+  font-style: italic; }
+
+.content {
+  -webkit-column-count: 2;
+  -moz-column-count: 2;
+  column-count: 2; }
+  .content h2 {
+    text-align: center; }
+
+.divContent {
+  border: solid 1px pink;
+  float: right; }
+  .divContent:nth-child(odd) {
+    float: left; }
+
+.spanContent {
+  border: solid 1px green;
+  float: right; }
+  .spanContent:nth-child(odd) {
+    float: left; }
+
+.pContent {
+  text-align: left;
+  border: solid 1px blue;
+  background-color: #cccccc; }
+
+.container {
+  text-align: center;
+  width: 100%; }
+  .container .row {
+    width: 100%;
+    box-sizing: border-box;
+    clear: both; }
+    .container .row .col-1 {
+      float: left;
+      border: solid 1px black;
+      width: 25%;
+      box-sizing: border-box;
+      text-align: right; }
+    .container .row .col-2 {
+      float: left;
+      border: solid 1px black;
+      width: 50%;
+      box-sizing: border-box; }
+    .container .row .col-4 {
+      float: left;
+      border: solid 1px black;
+      width: 100%;
+      box-sizing: border-box; }
+    .container .row .left-col-text {
+      text-align: left; }
+    .container .row .col-margin {
+      margin-left: 25%; }
+
+.boxsizing {
+  width: 200px;
+  height: 200px;
+  border: solid 1px red;
+  box-sizing: border-box; }
+
+@media screen and (max-width: 400px) {
+  .tablet-visible-color: red;
+  .desktop-visible-color: red;
+  .mobile-visible-color: green; }
+@media screen and (min-width: 401px) and (max-width: 800px) {
+  .tablet-visible-color: green;
+  .desktop-visible-color: red;
+  .mobile-visible-color: red; }
+@media screen and (min-width: 801px) {
+  .tablet-visible-color: red;
+  .desktop-visible-color: green;
+  .mobile-visible-color: red; }

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <link rel="stylesheet" href="css/site.min.gz.css">
+        <script src="libs/jquery/dist/jquery.js"></script>
+        <script src="js/dojo/dojo-config.js"></script>
+        <script src="libs/dojo/dojo.js"></script>
+    </head>
+
+    <body>
+
+    <header><nav><a href="index.html"><h1>Intuit Front End Bootcamp</h1></a></nav></header>
+
+    <h2>Javascript</h2>
+
+    <h3>DOM Creation</h3>
+
+    <!-- insert html code here -->
+    <div id="newsFlash" class=".news-story">
+        NEWS FLASH: If you own stocks, you're in for a shock today!!!
+        <h1>Market Crashed!</h1>
+        <small title="test">Market Rebounded</small>
+        <div id="placeHolder">
+            <div id="divider"></div>
+        </div>
+    </div>
+
+    <!-- insert script code here -->
+    <script>
+        // "use strict";
+
+        // std dom selector
+        var divElement = document.createElement("div");
+        // console.dir(divElement);
+
+        divElement.innerHTML = "Motel 6 & Hobees rocks";
+
+        document.getElementById('placeHolder').appendChild(divElement);
+
+        // jquery selector
+        var divElement2 = $("<div>");
+        // console.dir(divElement2);
+        divElement2.html("Hobees is really cool");
+
+        var divElements = $("<div>Here is some content!<br>Hi Class</div>");
+        // console.dir(divElements);
+
+        $("#placeHolder").append(divElements);
+
+        // newer dom selector
+        // var domElement2 = document.querySelector("#newsFlash");
+        // console.dir(domElement2);
+
+        // require(["dojo/dom", "dojo/dom-construct", "dojo/domReady!"], function(dom, domConstruct) {
+        //     var divElement3 = dom.byId("newsFlash");
+        //     console.dir(divElement3);
+        // });
+
+        // var domElements = document.getElementsByTagName("div");
+        // console.dir(domElements);
+
+        // var divElements = $("div");
+        // console.dir(divElements);
+
+        // var domElements2 = document.querySelector("div");
+        // console.dir(domElements2);
+
+        require(["dojo/dom", "dojo/dom-construct", "dojo/query", "dojo/domReady!"], function(dom, domConstruct, query) {
+            // var divElement3 = query("div");
+            // var divElement3 = query(".news-story");
+            // var divElement3 = query("div > h1");
+            // var divElement3 = query("[title=test]");
+            var divElement3 = domConstruct.create("div", {
+                innerHTML: "Motel 6 & Hobee's Rocks Again"
+            }, dom.byId("newsFlash"));
+
+
+            // console.dir(divElement3);
+
+            // domConstruct.place(divElement3, dom.byId("placeHolder"), "after");
+            domConstruct.place(divElement3, query("#placeHolder"), "after");
+
+            var divElements3 = domConstruct.toDom("<div>Here is some content!<br>Hi Class</div>");
+            // console.dir(divElements3);
+
+
+        });
+
+    </script>
+
+    </body>
+
+</html>

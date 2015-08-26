@@ -1,0 +1,8 @@
+$pageHeaderColor: green;
+$pageFooterColor: green;
+$articleHeaderColor: blue;
+$articleFooterColor: blue;
+
+@mixin fontHover($size) {
+    font-size: $size;
+}

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <link rel="stylesheet" href="css/site.min.gz.css">
+        <script src="libs/jquery/dist/jquery.js"></script>
+        <script src="js/dojo/dojo-config.js"></script>
+        <script src="libs/dojo/dojo.js"></script>
+    </head>
+
+    <body>
+
+    <header><nav><a href="index.html"><h1>Intuit Front End Bootcamp</h1></a></nav></header>
+
+    <h2>Javascript</h2>
+
+    <h3>DOM Edit Grid Exercise</h3>
+
+    <!-- insert html code here -->
+    <div id="car">
+        <table id="tblCar">
+        </table>
+    </div>
+
+    <!-- insert script code here -->
+    <script>
+        // "use strict";
+
+        require(["dojo/on", "dojo/dom", "dojo/domReady!"], function(on, dom) {
+            var data = {
+                headers: ["Make", "Model", "Year", "Price", "Color"],
+                entries: [
+                    ["BMW", "X5", "2008", "$18000", "White"],
+                    ["Honda", "Pilot", "2010", "$14000", "Green"],
+                    ["Nissan", "Fit", "2015", "$22000", "Blue"],
+                    ["Acura", "MDX", "2016", "$59000", "Red"],
+                ]
+            }
+            var tbl = $('#tblCar');
+
+            // dom creation
+            var tr1 = $("<tr>");
+            var th;
+            var td;
+
+            // insert a row
+            tbl.append(tr1);
+
+            data.headers.forEach(function(val) {
+                console.log('Header: ' + val);
+
+                th = $("<th>");
+                tr1.append(th);
+                th.html(val);
+            });
+
+            th = $("<th>");
+            tr1.append(th);
+            th.html("");
+
+            var tr;
+
+            var input = $("<input type='text'>");
+
+            var btn = $("<button type='button'>");
+
+            var handleEdit = function(evt) {
+                console.log('Edit Button Clicked');
+
+                var row = this.closest('tr');
+
+                    switch(this.state.mode) {
+                        case 'EDIT':
+                            for(var i=0; i<row.children.length - 1; i++) {
+                                var td = row.children[i];
+
+                                console.dir(td.childNodes[0]);
+
+                                td.childNodes[0].style.display = 'none';
+                                td.children[1].style.display = "inline";
+
+                                this.state.mode = this.modes.SAVE;
+                                $(this).html(this.modes.SAVE);
+                            }
+
+                            this.parentElement.children[1].style.display = 'inline';
+
+                            break;
+
+                        case 'SAVE':
+                            for(var i=0; i<row.children.length - 1; i++) {
+                                var td = row.children[i];
+
+                                console.dir(td.childNodes[0]);
+
+                                td.childNodes[0].style.display = 'inline';
+                                td.children[1].style.display = "none";
+
+                                this.state.mode = this.modes.EDIT;
+                                $(this).html(this.modes.EDIT);
+                            }
+
+                            this.parentElement.children[1].style.display = 'none';
+
+                            break;
+
+                        case 'CANCEL':
+                            for(var i=0; i<row.children.length - 1; i++) {
+                                var td = row.children[i];
+
+                                console.dir(td.childNodes[0]);
+
+                                td.childNodes[0].style.display = 'inline';
+                                td.children[1].style.display = "none";
+
+                                this.state.mode = this.modes.CANCEL;
+                                $(this).html(this.modes.CANCEL);
+                            }
+
+                            this.parentElement.children[0].state.mode = this.modes.EDIT;
+                            $(this.parentElement.children[0]).html(this.modes.EDIT);
+                            this.parentElement.children[1].style.display = 'none';
+
+                            break;
+                    }
+                    // td.childNodes[0].data =
+            };
+
+            data.entries.forEach(function(record) {
+                tr = $("<tr>");
+
+                tbl.append(tr);
+
+                record.forEach(function(val) {
+                    td = $("<td>");
+                    tr.append(td);
+                    td.html('<span>'+val+'</span>');
+
+                    input = input.clone();
+                    td.append(input);
+                    input[0].value = val;
+
+                    input[0].style.display = "none";
+                });
+
+                // add an crud button
+                td = $("<td>");
+                tr.append(td);
+
+                btn = btn.clone();
+
+                var cancel = btn.clone();
+
+                btn[0].handlers = {
+                    EDIT: { name: 'edit', fn: function() {} },
+                    CANCEL: { name: 'cancel', fn: function() {} },
+                    SAVE: { name: 'save', fn: function() {} }
+                };
+
+                btn[0].modes = {
+                    EDIT: 'EDIT',
+                    CANCEL: 'CANCEL',
+                    SAVE: 'SAVE',
+                    NONE: 'NONE'
+                }
+
+                btn[0].state = {
+                    mode: btn[0].modes.EDIT
+                }
+
+                btn.html(btn[0].modes.EDIT);
+
+                td.append(btn);
+
+                btn.on('click', handleEdit);
+
+                cancel[0].handlers = {
+                    EDIT: { name: 'edit', fn: function() {} },
+                    CANCEL: { name: 'cancel', fn: function() {} },
+                    SAVE: { name: 'save', fn: function() {} }
+                };
+
+                cancel[0].modes = {
+                    EDIT: 'EDIT',
+                    CANCEL: 'CANCEL',
+                    SAVE: 'SAVE',
+                    NONE: 'NONE'
+                }
+
+                cancel[0].state = {
+                    mode: cancel[0].modes.CANCEL
+                }
+
+                cancel.html(cancel[0].modes.CANCEL);
+                cancel[0].style.display = "none";
+
+                td.append(cancel);
+
+                cancel.on('click', handleEdit);
+            });
+
+        });
+
+    </script>
+
+    </body>
+
+</html>

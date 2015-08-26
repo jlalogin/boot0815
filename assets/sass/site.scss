@@ -1,0 +1,228 @@
+@import "themes/default";
+@import "themes/happy";
+
+// $pageHeaderColor: red;
+// $pageFooterColor: red;
+// $articleHeaderColor: blue;
+// $articleFooterColor: blue;
+
+@mixin border1($thickness) {
+    border: ridge #ccc $thickness;
+}
+
+@mixin fontStyle($wt:normal, $fam:arial, $sz:16px) {
+    font-weight: $wt;
+    font-family: $fam;
+    font-size: $sz;
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+    background-color: #3399cc;
+}
+
+.flexbox {
+    display: flex;
+    flex-direction: column;
+
+    // top:0px;
+    // left:0px;
+    // right:0px;
+    // bottom:0px;
+    // position: absolute;
+    // background-color: blue;
+
+    // width: 400px;
+    // height: 400px;
+    // margin-left: auto;
+    // margin-right: auto;
+    border: solid 1px red;
+    align-items: center;
+    justify-content: center;
+
+    div {
+        // flex-grow: 1;
+        border: solid black;
+        // line-height: 100%;
+        // margin-top: auto;
+        // margin-bottom: auto;
+
+        button: {
+            display: block;
+            color: green;
+            height: 30px;
+            vertical-align: middle;
+        }
+    }
+
+    header {
+        flex-grow: 1;
+        background-color: #ccc;
+    }
+
+    footer {
+        flex-grow: 1;
+        background-color: #ccc;
+    }
+
+}
+
+.box {
+    @include border1(25px);
+    @include fontStyle($fam:cursive);
+}
+
+.bold {
+    font-weight: bold;
+}
+
+header {
+    @extend .bold;
+    color: $pageHeaderColor;
+}
+
+footer {
+    color: $pageFooterColor;
+}
+
+div {
+    > header {
+        color: $articleHeaderColor;
+        &:hover {
+            @include fontHover($fontSize);
+        }
+    }
+
+    > footer {
+        color: $articleFooterColor;
+    }
+
+    > p {
+        font-family: sans-serif;
+    }
+}
+
+span {
+    @extend .bold;
+    font-style: italic;
+}
+
+.content {
+    @include column-count(2);
+    // @include column-gap(80px);
+    // @include column-rule(2px);
+    //
+    h2 {
+        // @include column-span(2);
+        text-align: center;
+    }
+}
+
+.divContent {
+    border: solid 1px pink;
+    float: right;
+
+    &:nth-child(odd) {
+        float:left;
+    }
+}
+
+.spanContent {
+    border: solid 1px green;
+    float: right;
+
+    &:nth-child(odd) {
+        float:left;
+    }
+}
+
+.pContent {
+    text-align: left;
+    border: solid 1px blue;
+    background-color: #cccccc;
+    // clear: right;
+}
+
+@mixin centered-text() {
+    text-align: center;
+}
+
+@mixin left-text() {
+    text-align: left;
+}
+
+@mixin right-text() {
+    text-align: right;
+}
+
+// grid styles
+.container {
+    @include centered-text();
+
+    width: 100%;
+
+    .row {
+        width: 100%;
+        box-sizing: border-box;
+        clear: both;
+
+        .col-1 {
+            float: left;
+            border: solid 1px black;
+            width: 25%;
+            box-sizing: border-box;
+            @include right-text();
+        }
+        .col-2 {
+            float: left;
+            border: solid 1px black;
+            width: 50%;
+            box-sizing: border-box;
+        }
+
+        .col-4 {
+            float: left;
+            border: solid 1px black;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .left-col-text {
+            @include left-text();
+        }
+
+        .col-margin {
+            margin-left: 25%;
+        }
+    }
+}
+
+// box model
+.boxsizing {
+    width:200px;
+    height: 200px;
+    border: solid 1px red;
+    box-sizing: border-box;
+}
+
+$mobile-max-width: 400px;
+$tablet-max-width: 800px;
+
+@media screen and (max-width: $mobile-max-width) {
+    .tablet-visible: { color: red; }
+    .desktop-visible: { color: red; }
+    .mobile-visible: { color: green; }
+}
+
+@media screen and (min-width: $mobile-max-width + 1) and (max-width: $tablet-max-width) {
+    .tablet-visible: { color: green; }
+    .desktop-visible: { color: red; }
+    .mobile-visible: { color: red; }
+}
+
+@media screen and (min-width: $tablet-max-width + 1) {
+    .tablet-visible: { color: red; }
+    .desktop-visible: { color: green; }
+    .mobile-visible: { color: red; }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "bootcamp_08172015",
+  "version": "0.0.0",
+  "homepage": "https://github.com/training4developers/bootcamp_08172015",
+  "authors": [
+    "Eric W. Greene <eric@training4developers.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/www/libs",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "requirejs": "~2.1.20",
+    "dojo": "~1.10.4",
+    "jquery": "~2.1.4"
+  }
+}

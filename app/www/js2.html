@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <link rel="stylesheet" href="css/site.min.gz.css">
+    </head>
+
+    <body>
+
+    <header><nav><a href="index.html"><h1>Intuit Front End Bootcamp</h1></a></nav></header>
+
+    <h2>Javascript</h2>
+
+    <h3>Prototype Inheritance</h3>
+
+    <!-- insert html code here -->
+    view source for details...
+
+    <script>
+        "use strict";
+
+        // simple inheritance
+        function xtend(clsA, clsB) {
+            clsA.prototype = Object.create(clsB.prototype);
+            clsA.prototype.constructor = clsA;
+            clsA.prototype._super = clsB;
+        }
+
+        // base account type
+        function Account(init_bal) {
+            this.balance = init_bal || 0;
+        }
+
+        // statics
+        Account.TRANSACTION_TYPE_WITHDRAW = 'withdraw';
+        Account.TRANSACTION_TYPE_DEPOSIT = 'deposit';
+
+        // add transaction of type, amount
+        Account.prototype.addTransaction = function(data) {
+            if(data.transaction_type == Account.TRANSACTION_TYPE_WITHDRAW) {
+                return this.withdraw(data);
+            }
+            else if (data.transaction_type == Account.TRANSACTION_TYPE_DEPOSIT) {
+                return this.deposit(data);
+            }
+            else {
+                // poop
+                throw new Error("unsupported transaction: " + data.transaction_type);
+            }
+        };
+
+        // just add
+        Account.prototype.deposit = function(data) {
+            this.balance += data.amount;
+
+            return { new_balance: this.balance };
+        };
+
+        // just subtract
+        Account.prototype.withdraw = function(data) {
+            this.balance -= data.amount;
+
+            return { new_balance: this.balance };
+        };
+
+        // current balance
+        Account.prototype.getBalance = function() {
+            return this.balance;
+        };
+
+        // checking acct type
+        function CheckingAccount(init_bal) {
+            this._super.call(this, init_bal);
+        }
+
+        // all bout da base
+        xtend(CheckingAccount, Account);
+
+        // savings acct type
+        function SavingsAccount(init_bal) {
+            this.withdrawals = 0;
+
+            this._super.call(this, init_bal);
+        }
+
+        // arbitrary savings specific limit
+        SavingsAccount.TRANSACTION_WITHDRAWAL_LIMIT = 6;
+
+        // all bout da base
+        xtend(SavingsAccount, Account);
+
+        // savings specific withdrawals
+        SavingsAccount.prototype.withdraw = function(data) {
+            if(this.withdrawals < SavingsAccount.TRANSACTION_WITHDRAWAL_LIMIT) {
+                this.balance -= data.amount;
+                this.withdrawals++;
+
+                return { new_balance: this.balance, total_withdrawals: this.withdrawals, max_withdrawals: SavingsAccount.TRANSACTION_WITHDRAWAL_LIMIT };
+            }
+            else {
+                // poop
+                throw new Error("too many withdrawals");
+            }
+        };
+
+    </script>
+
+    </body>
+
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <link rel="stylesheet" href="css/site.min.gz.css">
+        <script src="libs/jquery/dist/jquery.js"></script>
+        <script src="js/dojo/dojo-config.js"></script>
+        <script src="libs/dojo/dojo.js"></script>
+    </head>
+
+    <body>
+
+    <header><nav><a href="index.html"><h1>Intuit Front End Bootcamp</h1></a></nav></header>
+
+    <h2>Javascript</h2>
+
+    <h3>DOM Grid Exercise</h3>
+
+    <!-- insert html code here -->
+    <div id="car">
+        <table id="tblCar">
+            <tr id="btnRow">
+                    <td>Name</td>
+                    <td>Desc</td>
+                    <td>Date</td>
+                    <td><button id="myButton" type="Button">Button</button></td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- insert script code here -->
+    <script>
+        // "use strict";
+
+        require(["dojo/on", "dojo/dom", "dojo/domReady!"], function(on, dom) {
+            var tbl = $('#tblCar');
+            console.dir(tbl);
+
+            var btnRow = $('#btnRow');
+            console.dir($('#myButton').closest('tr'));
+
+            var fn1 = function() {
+                console.log('I was clicked 1');
+            };
+
+            // events
+            var myButton = document.getElementById('myButton');
+            // myButton.addEventListener("click", function() {
+            //     console.log("I was clicked 1");
+            // });
+            //
+            // myButton.addEventListener("click", function() {
+            //     console.log("I was clicked 2");
+            // });
+            //
+            // myButton.addEventListener("click", function() {
+            //     console.log("I was clicked 3");
+            // });
+
+            $('#myButton').on('click', fn1);
+
+            $('#myButton').on('click', function() {
+                console.log("I was clicked 2");
+            });
+
+            $('#myButton').on('click', function() {
+                console.log("I was clicked 3");
+            });
+
+            $('#myButton').off('click', fn1);
+
+            var reg = on(dom.byId("myButton"), 'click', fn1);
+
+            reg.remove();
+
+            on.once(dom.byId("myButton"), 'click', fn1);
+
+            // dom creation
+            var tr1 = $("<tr>");
+            var th;
+            var td;
+
+            // insert a row
+            // tbl.append(tr);
+
+            (
+                ["Make", "Model", "Year", "Price", "Color"]
+            ).forEach(function(val) {
+                console.log('Header: ' + val);
+
+                th = $("<th>");
+                tr1.append(th);
+                th.html(val);
+            });
+
+            var tr;
+
+            ([
+                ["BMW", "X5", "2008", "$18000", "White"],
+                ["Honda", "Pilot", "2010", "$14000", "Green"],
+                ["Nissan", "Fit", "2015", "$22000", "Blue"],
+                ["Acura", "MDX", "2016", "$59000", "Red"],
+            ]).forEach(function(record) {
+                tr = $("<tr>");
+
+                tbl.append(tr);
+
+                record.forEach(function(val) {
+                    td = $("<td>");
+                    tr.append(td);
+                    td.html(val);
+                })
+            });
+
+            tbl.before(tr1, tr);
+        });
+
+    </script>
+
+    </body>
+
+</html>

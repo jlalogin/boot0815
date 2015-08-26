@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <link rel="stylesheet" href="css/site.min.gz.css">
+        <!-- <script data-main="js/main" src="libs/requirejs/require.js"></script> -->
+        <!-- <script data-main="js/main" src="libs/requirejs/require.js"></script> -->
+        <!-- <script src="libs/jquery/dist/jquery.js"></script> -->
+        <!-- <script src="js/dojo/dojo-config.js"></script> -->
+        <!-- <script src="libs/dojo/dojo.js"></script> -->
+
+        <style>
+        </style>
+    </head>
+
+    <body>
+
+    <header><nav><a href="index.html"><h1>Intuit Front End Bootcamp</h1></a></nav></header>
+
+    <h2>Upload Button</h2>
+
+    <h3></h3>
+
+    <!-- insert html code here -->
+
+    <div id="drop-zone"></div>
+
+    <form>
+        <input type="file" multiple id="uploadFile">
+        <button type="button">Upload</button>
+        <br><br>
+        <progress id="uploadProgress" value='0' max='0'></progress>
+    </form>
+
+    <!-- insert script code here -->
+    <script>
+        // "use strict";
+        var uploadButton = document.getElementsByTagName("button")[0];
+
+        uploadButton.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            var fileInput = document.getElementById('uploadFile');
+
+            var fd = new FormData();
+
+            for (var x=0; x<fileInput.files.length; x++) {
+                console.log('uploading ' + x.name);
+                fd.append("files", fileInput.files[x]);
+            }
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.upload.addEventListener('progress', function(e) {
+                var uploadProgress = document.getElementById('uploadProgress');
+
+                uploadProgress.setAttribute('max', e.total);
+                uploadProgress.setAttribute('min', e.uploaded)
+            })
+
+            xhr.addEventListener('readystatechange', function(e) {
+                if(xhr.readyState === 4 && xhr.status === 200) {
+                    console.log('file transferred!');
+                }
+            })
+
+            xhr.open('POST', '/api/upload');
+            xhr.send(fd);
+        });
+    </script>
+
+    </body>
+</html>

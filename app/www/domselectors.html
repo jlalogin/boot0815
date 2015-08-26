@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <link rel="stylesheet" href="css/site.min.gz.css">
+        <script src="libs/jquery/dist/jquery.js"></script>
+        <script src="js/dojo/dojo-config.js"></script>
+        <script src="libs/dojo/dojo.js"></script>
+    </head>
+
+    <body>
+
+    <header><nav><a href="index.html"><h1>Intuit Front End Bootcamp</h1></a></nav></header>
+
+    <h2>Javascript</h2>
+
+    <h3>DOM Selectors</h3>
+
+    <!-- insert html code here -->
+    <div id="newsFlash" class=".news-story">
+        NEWS FLASH: If you own stocks, you're in for a shock today!!!
+        <h1>Market Crashed!</h1>
+        <small title="test">Market Rebounded</small>
+    </div>
+
+    <!-- insert script code here -->
+    <script>
+        "use strict";
+
+        // std dom selector
+        var domElement = document.getElementById("newsFlash");
+        console.dir(domElement);
+
+        // jquery selector
+        var divElement = $("#newsFlash");
+        console.dir(divElement);
+
+        // newer dom selector
+        var domElement2 = document.querySelector("#newsFlash");
+        console.dir(domElement2);
+
+        require(["dojo/dom", "dojo/dom-construct", "dojo/domReady!"], function(dom, domConstruct) {
+            var divElement3 = dom.byId("newsFlash");
+            console.dir(divElement3);
+        });
+
+        var domElements = document.getElementsByTagName("div");
+        console.dir(domElements);
+
+        var divElements = $("div");
+        console.dir(divElements);
+
+        var domElements2 = document.querySelector("div");
+        console.dir(domElements2);
+
+        require(["dojo/dom", "dojo/dom-construct", "dojo/query", "dojo/domReady!"], function(dom, domConstruct, query) {
+            // var divElements3 = query("div");
+            // var divElements3 = query(".news-story");
+            // var divElements3 = query("div > h1");
+            var divElements3 = query("[title=test]");
+            console.dir(divElements3);
+        });
+
+    </script>
+
+    </body>
+
+</html>

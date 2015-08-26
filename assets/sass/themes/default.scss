@@ -1,0 +1,16 @@
+$fontSize: 1.25em;
+
+@mixin column-count($val) {
+    -webkit-column-count: $val; // webkit
+    -moz-column-count: $val; // mozilla, safari, opera
+    column-count: $val; // firefox
+}
+// @mixin column-gap($val){
+//
+// }
+// @mixin column-rule($val){
+//
+// }
+// @mixin column-span($val){
+//
+// }

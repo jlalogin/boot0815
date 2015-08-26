@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <link rel="stylesheet" href="css/site.min.gz.css">
+
+        <script>
+            var Config = [
+                { name: 'profile' },
+                { name: 'semantic' },
+                { name: 'contact' },
+                { name: 'video' },
+                { name: 'css1' },
+                { name: 'selector1' },
+                { name: 'sass1' },
+                { name: 'grid1' },
+                { name: 'profilegrid1' },
+                { name: 'box0' },
+                { name: 'responsive' },
+                { name: 'js1' },
+                { name: 'js2' },
+                { name: 'js3' },
+                { name: 'js4' },
+                { name: 'domselectors' },
+                { name: 'domcreation' },
+                { name: 'domgrid' },
+                { name: 'domeditgrid' },
+                { name: 'requirejs' },
+                { name: 'draganddrop' },
+                { name: 'uploadbutton' },
+                { name: 'uploadmodule' },
+                { name: 'uploadws' },
+            ];
+        </script>
+    </head>
+
+    <body>
+
+    <header><nav><a href="index.html"><h1>Intuit Front End Bootcamp</h1></a></nav></header>
+
+    <h2>Exercises</h2>
+
+    <ul id="exercises"></ul>
+
+    <script>
+        window.onload = function() {
+            var exercises = document.getElementById("exercises");
+
+            for(var i=0; i<Config.length; i++) {
+                var li = document.createElement("li");
+                li.innerHTML = "<a href='" + (Config[i].path || (Config[i].name + ".html")) + "'>" + Config[i].name + "</a>";
+                exercises.appendChild(li);
+            }
+        };
+    </script>
+
+    </body>
+</html>

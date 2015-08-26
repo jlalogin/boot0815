@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <link rel="stylesheet" href="css/site.min.gz.css">
+    </head>
+
+    <body>
+
+    <header><nav><a href="index.html"><h1>Intuit Front End Bootcamp</h1></a></nav></header>
+
+    <h2>Javascript</h2>
+
+    <!-- insert html code here -->
+
+    <script>
+        "use strict";
+
+        var x=0,y=0,fns=[],fns_len=5;
+
+        for(;x<fns_len;x++) {
+            ((x % 2) && (
+                fns.push(function(x) {
+                    return function() {
+                        console.log(x);
+                    };
+                }(x))
+            ))
+            ||
+            (
+                fns.push((function(x) {
+                    console.log(x);
+                }).bind(null, x))
+            )
+        }
+
+        for(;y<fns_len;y++) {
+            fns[y]();
+        }
+
+        function outer() {
+            var n = Math.ceil(Math.random() * 100);
+
+            ((n % 2) && (
+                function inner(o) {
+                    console.log(o);
+                }(this)
+            ))
+            ||
+            ((n % 3) && (
+                (function inner() {
+                    console.log(this);
+                }).apply(this)
+            ))
+            ||
+            ((n % 5) && (
+                (function inner() {
+                    console.log(this);
+                }).call(this)
+            ))
+            ||
+            (
+                (function inner() {
+                    console.log(this);
+                }).bind(this)()
+            )
+        }
+
+        outer.call({id: 3});
+
+        function fn1() {
+            fn2.apply(null, arguments);
+        }
+
+        function fn2(v) {
+            console.log(v);
+        }
+
+        fn1('xxx');
+
+    </script>
+
+    </body>
+
+</html>

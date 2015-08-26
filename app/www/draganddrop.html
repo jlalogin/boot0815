@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <link rel="stylesheet" href="css/site.min.gz.css">
+        <!-- <script data-main="js/main" src="libs/requirejs/require.js"></script> -->
+        <!-- <script data-main="js/main" src="libs/requirejs/require.js"></script> -->
+        <!-- <script src="libs/jquery/dist/jquery.js"></script> -->
+        <!-- <script src="js/dojo/dojo-config.js"></script> -->
+        <!-- <script src="libs/dojo/dojo.js"></script> -->
+
+        <style>
+            #red-box {
+                float: left;
+                width: 50px;
+                height: 50px;
+                margin: 20px;
+                background-color: red;
+            }
+
+            #blue-box {
+                float: right;
+                width: 100px;
+                height: 100px;
+                margin: 20px;
+                background-color: blue;
+            }
+
+            .active {
+                border: dashed 3px purple;
+            }
+
+            #drop-zone {
+				float:left;
+				width:200px;
+				height:200px;
+				background-color: white;
+				box-sizing: border-box;
+				border: 2px dashed #999999;
+			}
+
+			#drop-zone .active {
+				border: 3px dashed black;
+			}
+        </style>
+    </head>
+
+    <body>
+
+    <header><nav><a href="index.html"><h1>Intuit Front End Bootcamp</h1></a></nav></header>
+
+    <h2>Drag and Drop</h2>
+
+    <h3></h3>
+
+    <!-- insert html code here -->
+    <!-- <div id="red-box" draggable="true"></div>
+    <div id="blue-box"></div> -->
+
+    <div id="drop-zone"></div>
+
+    <!-- insert script code here -->
+    <script>
+        // "use strict";
+        document.addEventListener('dragenter', function(e) {
+            e.preventDefault();
+            e.target.classList.add('active');
+        });
+
+        document.addEventListener('dragleave', function(e) {
+            e.preventDefault();
+            e.target.classList.remove('active');
+        });
+
+        // document.addEventListener('dragstart', function(e) {
+        //     // console.log('dragging started: ' + e.target.id);
+        //     //
+        //     // console.dir(e.dataTransfer);
+        //
+        //     e.dataTransfer.setData('dragId', e.target.id);
+        // });
+
+        document.addEventListener('dragover', function(e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('drop', function(e) {
+            e.preventDefault();
+
+            // // console.log('dropping on: ' + e.target.id);
+            //
+            // blueBox.classList.remove('active');
+            //
+            // var dragElement = document.getElementById(e.dataTransfer.getData('dragId'));
+            // var dropElement = e.target;
+            //
+            // dropElement.appendChild(dragElement);
+
+            e.target.classList.remove('active');
+
+            console.dir(e.dataTransfer.files);
+
+            var fd = new FormData();
+
+            for(var x=0; x<e.dataTransfer.files.length; x++) {
+                fd.append("files", e.dataTransfer.files[x]);
+            }
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.addEventListener('readystatechange', function(e) {
+                if(xhr.readyState === 4 && xhr.status === 200) {
+                    console.log('file transferred!');
+                }
+            })
+
+            xhr.open('POST', '/api/upload');
+            xhr.send(fd);
+        });
+    </script>
+
+    </body>
+</html>
